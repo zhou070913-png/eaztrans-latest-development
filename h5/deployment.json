@@ -1,0 +1,10 @@
+{
+  "name": "最新开发版",
+  "environment": "latest-development",
+  "project": "sqnxjyckgbazsqsafgrc",
+  "repository": "zhou070913-png/eaztrans-latest-development",
+  "sourceCommit": "08b315e434dfc91d550d6d216d3511516e148f77",
+  "builtAt": "2026-10-29T10:28:14.016Z",
+  "surface": "merchant-h5",
+  "desktopBaseline": "878f628b64db2f85b19b47eb80512ffba4b678e5"
+}
