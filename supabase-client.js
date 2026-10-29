@@ -6,7 +6,7 @@
  * anon key 不是数据库密码；不要把 service_role key 放到浏览器或 GitHub。
  */
 (function (global) {
-  const config = {"url":"https://sqnxjyckgbazsqsafgrc.supabase.co","anonKey":"sb_publishable_aGEsaPYlZwRMoJFKcpVHrg_nGYN8JwO"};
+  const config = {"url":"https://sqnxjyckgbazsqsafgrc.supabase.co","anonKey":"sb_publishable_aGEsaPYlZwRMoJFKcpVHrg_nGYN8JwO","signupVerification":"link"};
   let client = null;
 
   function isConfigured() {
@@ -89,7 +89,7 @@
     const { data, error } = await instance.auth.signUp({
       email,
       password,
-      options: { data: { full_name: '跨境商家' } }
+      options: { emailRedirectTo: global.location.origin + global.location.pathname, data: { full_name: '跨境商家' } }
     });
     if (error) throw error;
     return data;
@@ -103,6 +103,18 @@
       options: { emailRedirectTo: window.location.origin + window.location.pathname }
     });
     if (error) throw error;
+  }
+
+  function registrationVerificationMode() {
+    // Enable OTP only after the project's confirmation email actually contains {{ .Token }}.
+    return config.signupVerification === 'otp' ? 'otp' : 'link';
+  }
+
+  async function verifyRegistrationCode(email, token) {
+    const instance = await requireClient();
+    const { data, error } = await instance.auth.verifyOtp({ email, token, type: 'email' });
+    if (error) throw error;
+    return data;
   }
 
   async function signOut() {
@@ -303,6 +315,8 @@
     memberNoByEmail,
     signUp,
     resendConfirmation,
+    registrationVerificationMode,
+    verifyRegistrationCode,
     signOut,
     myOrders,
     orderTracking,
