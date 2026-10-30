@@ -116,7 +116,7 @@ localizeKnownDom=function(root=document.body){
  const observer=typeof localeMutationObserver==='undefined'?null:localeMutationObserver;observer?.disconnect();
  try{
  ensureLanguageControl();document.documentElement.lang=uiLangTag();
- const title=uiText('Eaztrans集运｜商家移动端','Eaztrans Logistik · Pelanggan seluler','Eaztrans Logistics · Customer mobile');if(document.title!==title)document.title=title;
+ const title=uiText('Eaztrans集运系统','Eaztrans Logistik','Eaztrans Logistics');if(document.title!==title)document.title=title;
  if(root.matches?.('[data-i18n][data-zh]'))updateUiElement(root);
  for(const el of root.querySelectorAll('[data-i18n][data-zh]'))updateUiElement(el);
  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];
