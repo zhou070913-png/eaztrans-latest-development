@@ -15,7 +15,7 @@
 
   function getClient() {
     if (!isConfigured()) return null;
-    if (!client) client = global.supabase.createClient(config.url, config.anonKey);
+    if (!client) client = global.supabase.createClient(config.url, config.anonKey, {auth:{storageKey:'eaztrans-h5-auth-v1',persistSession:false,detectSessionInUrl:true}});
     return client;
   }
 
